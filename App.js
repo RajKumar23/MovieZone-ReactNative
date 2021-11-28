@@ -1,21 +1,34 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { useState } from 'react';
+import Home from './screens/home';
+import About from './screens/about';
+import * as Font from 'expo-font';
+import AppLoading from 'expo-app-loading';
+import Navigation from "./routes/homeStack";
+import RootNavigationDrawer from "./routes/drawer";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+const getFonts = () => {
+  return Font.loadAsync({
+    "light": require("./assets/fonts/Merriweather-Light.ttf"),
+    "regular": require("./assets/fonts/Merriweather-Regular.ttf"),
+    "Bold": require("./assets/fonts/Merriweather-Bold.ttf")
+  });
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default function App() {
+
+  const [getFrontLoad, setFontLoad] = useState(false);
+
+  if (getFrontLoad) {
+    return (
+      <RootNavigationDrawer />
+    );
+  } else {
+    return (
+      <AppLoading
+        startAsync={getFonts}
+        onFinish={() => setFontLoad(true)}
+        onError={(err) => console.log(err)}
+      />
+    );
+  }
+}
