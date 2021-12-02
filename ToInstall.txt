@@ -4,5 +4,11 @@ expo install expo-app-loading - Used to install/download font in background befo
 npm install @react-navigation/native
 expo install react-native-screens react-native-safe-area-context
 npm install react-navigation-stack
-
+//drawer
 npm install react-navigation-drawer
+
+//3ed party Form - Formik
+npm install formik 
+
+//Form validation
+npm install yup
